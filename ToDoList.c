@@ -33,7 +33,7 @@ int main(){
      printf("5. Delete a task\n");
      printf("6. Exit\n");
      scanf("%d", &choice);
-     printf("Hello");
+    
      switch(choice)
      {
         case 1:
