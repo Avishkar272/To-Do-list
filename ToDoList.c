@@ -14,8 +14,7 @@ int count=0;
 
 void addTasks();
 void viewTasks();
-void markcomp();
-void markincomp();
+void updateTasks();
 void deleteTasks();
 void saveTasks();
 void loadTasks();
@@ -28,10 +27,9 @@ int main(){
      printf("--------TO DO LIST-------");
      printf("1. Add a task\n");
      printf("2. View tasks\n");
-     printf("3. Mark a task as completed\n");
-     printf("4. Mark a task incomplete");
-     printf("5. Delete a task\n");
-     printf("6. Exit\n");
+     printf("3. Update Task\n");
+     printf("4. Delete a task\n");
+     printf("5. Exit\n");
      scanf("%d", &choice);
     
      switch(choice)
@@ -43,15 +41,9 @@ int main(){
          viewTasks();
         break;
         case 3:
-         markcomp();
-        break;
-        case 4:
-         markincomp();
+         updateTasks();
         break;
         case 5:
-         deleteTasks();
-        break;
-        case 6:
          saveTasks();
          exit(0);
         break;
