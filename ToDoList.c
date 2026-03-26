@@ -43,6 +43,9 @@ int main(){
         case 3:
          updateTasks();
         break;
+        case 4:
+         deleteTasks();
+        break;
         case 5:
          saveTasks();
          exit(0);
