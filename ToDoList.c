@@ -2,14 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 
+#define maxTasks 100
+
 struct ToDoList
 {
     int id;
     char TaskName[100];
     char status[20]; 
 };
-struct ToDoList *Tasks;
-int maxTasks=0;
+struct ToDoList Tasks[maxTasks];
 int count=0;
 
 void addTasks();
@@ -19,8 +20,54 @@ void deleteTasks();
 void saveTasks();
 void loadTasks();
 
+void updateTasks(){
+char ch;
+int id,fl=0;
+ 
+printf("Enter the Task ID that needs to be updated");
+scanf("%d",&id);
+for(int i=0;i<count;i++)
+{
+    if(Tasks[i].id==id && Tasks[i].TaskName[0]!="\0")
+    {
+     fl=1;
+     break;
+    }
+}
+if(fl==0)
+{
+    printf("Wrong input!");
+    return;
+}
+printf("Is the task completed? Input Y for Yes and N for No");
+scanf(" %c",&ch);
+
+if(ch=='N' || ch=='n')
+{
+ printf("the Task was not updated!");
+ return;
+}
+else if(ch=='Y' || ch=='y')
+{
+    for(int i=0;i<count;i++)
+    {
+        if(Tasks[i].id==id)
+        {
+           strcpy(Tasks[i].status,"Completed!");
+           printf("Tasks marked complete!");
+           saveTasks();
+           return;
+        }
+    }
+}
+else{
+    printf("Wrong Input!");
+    return;
+}
+}
+
 int main(){
-    Tasks = (struct ToDoList *)malloc(maxTasks*sizeof(struct ToDoList));
+    
     int choice;
     loadTasks();
     while (1){
@@ -54,5 +101,5 @@ int main(){
         printf("Wrong input");
      }
     }
-    free(Tasks);
+   
 }
