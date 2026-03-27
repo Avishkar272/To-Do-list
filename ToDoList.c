@@ -28,15 +28,25 @@ printf("Enter the Task ID that needs to be updated");
 scanf("%d",&id);
 for(int i=0;i<count;i++)
 {
-    if(Tasks[i].id==id && Tasks[i].TaskName[0]!="\0")
+    if(Tasks[i].id==id && Tasks[i].TaskName[0]!='\0')
     {
      fl=1;
      break;
     }
+    if(Tasks[i].id==id && Tasks[i].TaskName[0]=='\0')
+    {
+        fl=2;
+        break;
+    }
 }
 if(fl==0)
 {
-    printf("Wrong input!");
+    printf("Wrong ID is entered!");
+    return;
+}
+if(fl==2)
+{
+    printf("Task is empty");
     return;
 }
 printf("Is the task completed? Input Y for Yes and N for No");
