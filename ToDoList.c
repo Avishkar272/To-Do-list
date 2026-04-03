@@ -20,6 +20,13 @@ void deleteTasks();
 void saveTasks();
 void loadTasks();
 
+void viewTasks(){
+    printf("ID\tTaskName\tStatus");
+    for(int i=0;i<count;i++){
+        printf("%d\t%s\t%s",Tasks[i].id,Tasks[i].TaskName,Tasks[i].status);
+    }
+}
+
 void updateTasks(){
 char ch;
 int id,fl=0;
