@@ -21,17 +21,18 @@ void saveTasks();
 void loadTasks();
 
 void viewTasks(){
-    printf("ID\tTaskName\tStatus");
+    printf("\nID\tTask Name\t\tStatus\n");
+    printf("--------------------------------------------\n");
     for(int i=0;i<count;i++){
-        printf("%d\t%s\t%s",Tasks[i].id,Tasks[i].TaskName,Tasks[i].status);
+        printf("%d\t%s\t\t%s\n", Tasks[i].id, Tasks[i].TaskName, Tasks[i].status);
     }
+    printf("\n");
 }
 
 void updateTasks(){
 char ch;
-int id,fl=0;
- 
-printf("Enter the Task ID that needs to be updated");
+int id,fl=0,choice=0;
+ printf("\nEnter the Task ID that needs to be updated: ");
 scanf("%d",&id);
 for(int i=0;i<count;i++)
 {
@@ -48,52 +49,95 @@ for(int i=0;i<count;i++)
 }
 if(fl==0)
 {
-    printf("Wrong ID is entered!");
+    printf("\nWrong ID is entered!");
     return;
 }
 if(fl==2)
 {
-    printf("Task is empty");
+    printf("\nTask is empty");
     return;
 }
-printf("Is the task completed? Input Y for Yes and N for No");
-scanf(" %c",&ch);
+printf("\nPress 1 to change the name and 2 to change the status: ");
+scanf("%d",&choice);
+if(choice==1)
+{
+    getchar();
+    printf("\nDo you want to change the task name? Press Y/y for yes or N/n for no: ");
+    scanf("%c",&ch);
 
-if(ch=='N' || ch=='n')
-{
- printf("the Task was not updated!");
- return;
-}
-else if(ch=='Y' || ch=='y')
-{
-    for(int i=0;i<count;i++)
+    if(ch=='N' || ch=='n')
     {
-        if(Tasks[i].id==id)
+        printf("\nThe Task name was not updated!");
+        return;
+    }
+    else if(ch=='Y' || ch=='y')
+    {
+        for(int i=0;i<count;i++)
         {
-           strcpy(Tasks[i].status,"Completed!");
-           printf("Tasks marked complete!");
-           saveTasks();
-           return;
+            if(Tasks[i].id==id)
+            {
+                getchar();
+                char temp[100];
+                printf("Enter new Task name: ");
+                scanf("%[^\n]", temp);
+                strcpy(Tasks[i].TaskName, temp);
+                printf("\nTask name changed!");
+                break;
+            }
         }
     }
+    else{
+        printf("\nWrong Input!");
+        return;
+    }
 }
-else{
-    printf("Wrong Input!");
+else if(choice==2)
+{
+    printf("\nIs the task completed? Press Y/y for Yes and N/n for No: ");
+    scanf(" %c",&ch);
+
+    if(ch=='N' || ch=='n')
+    {
+        printf("\nThe Task status was not updated!");
+        return;
+    }
+    else if(ch=='Y' || ch=='y')
+    {
+        for(int i=0;i<count;i++)
+        {
+            if(Tasks[i].id==id)
+            {
+                strcpy(Tasks[i].status,"Completed!");
+                printf("\nTask marked complete!");
+                break;
+            }
+        }
+    }
+    else{
+        printf("\nWrong Input!");
+        return;
+    }
+}
+else
+{
+    printf("\nWrong choice! Please enter 1 or 2.");
     return;
 }
 }
+
 
 int main(){
     
     int choice;
     loadTasks();
     while (1){
-     printf("--------TO DO LIST-------");
+     printf("\n--------TO DO LIST-------\n");
      printf("1. Add a task\n");
      printf("2. View tasks\n");
      printf("3. Update Task\n");
      printf("4. Delete a task\n");
      printf("5. Exit\n");
+     printf("Enter your choice: ");
      scanf("%d", &choice);
     
      switch(choice)
